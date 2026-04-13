@@ -1,0 +1,8 @@
+[
+{
+  "directory": "C:/Users/Andrey/CLionProjects/parallel_prog/cmake-build-release",
+  "command": "C:\\PROGRA~1\\JETBRA~1\\CLION2~1.2\\bin\\mingw\\bin\\G__~1.EXE -O3 -DNDEBUG -std=gnu++20 -fdiagnostics-color=always -O3 -march=native -o CMakeFiles\\parallel_prog.dir\\main.cpp.obj -c C:\\Users\\Andrey\\CLionProjects\\parallel_prog\\main.cpp",
+  "file": "C:/Users/Andrey/CLionProjects/parallel_prog/main.cpp",
+  "output": "C:/Users/Andrey/CLionProjects/parallel_prog/cmake-build-release/CMakeFiles/parallel_prog.dir/main.cpp.obj"
+}
+]
