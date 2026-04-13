@@ -11,10 +11,10 @@ EXE_PATH = r"cmake-build-release\parallel_prog.exe"
 times = []
 
 if not os.path.exists(EXE_PATH):
-    print(f"❌ ОШИБКА: Файл {EXE_PATH} не найден. Соберите проект в Release.")
+    print(f" ОШИБКА: Файл {EXE_PATH} не найден. Соберите проект в Release.")
     exit(1)
 
-print("🚀 Запуск автоматического тестирования...\n")
+print(" Запуск автоматического тестирования...\n")
 
 for N in SIZES:
     print(f"⏳ Тестирование матрицы {N}x{N}...")
@@ -41,7 +41,7 @@ for N in SIZES:
         times.append(time_ms)
         print(f"   Время: {time_ms:.2f} мс")
     else:
-        print("   ❌ Ошибка парсинга времени! Вот что на самом деле ответил C++:")
+        print("    Ошибка парсинга времени! Вот что на самом деле ответил C++:")
         print("   STDOUT (Вывод):", result.stdout.strip())
         print("   STDERR (Ошибки):", result.stderr.strip())
         times.append(0)
@@ -53,4 +53,8 @@ plt.xlabel('Размер матрицы (N x N)', fontsize=12)
 plt.ylabel('Время выполнения (мс)', fontsize=12)
 plt.grid(True, linestyle='--', alpha=0.7)
 plt.savefig('benchmark_plot.png', dpi=300, bbox_inches='tight')
-print("\n📈 График сохранен как 'benchmark_plot.png'")
+
+print("| Размер матрицы (N x N) | Объем задачи (элементов) | Время выполнения (мс) |")
+print("| :--- | :--- | :--- |")
+for n, t in zip(SIZES, times):
+    print(f"| {n} x {n} | {n**2} | {t:.2f} |")
