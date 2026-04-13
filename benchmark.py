@@ -4,10 +4,9 @@ import os
 import re
 import matplotlib.pyplot as plt
 
-# Настройки бенчмарка
 SIZES = [200, 400, 800, 1200, 1600, 2000]
 KERNEL_SIZE = 5
-EXE_PATH = r"cmake-build-release\parallel_prog.exe" # УБЕДИТЕСЬ, ЧТО ТУТ RELEASE СБОРКА!
+EXE_PATH = r"cmake-build-release\parallel_prog.exe" 
 
 times = []
 
@@ -32,10 +31,8 @@ for N in SIZES:
         f.write(f"{KERNEL_SIZE} {KERNEL_SIZE}\n")
         np.savetxt(f, kernel, fmt='%.4f')
 
-    # Запускаем C++
     result = subprocess.run([EXE_PATH], capture_output=True, text=True)
 
-    # Ищем время, поддерживая цифры, точки, запятые и экспоненту (e/E)
     match = re.search(r"Execution Time:\s*([0-9.,eE+-]+)\s*ms", result.stdout)
     if match:
         # Меняем возможную русскую запятую на точку, чтобы float() не упал
@@ -49,7 +46,6 @@ for N in SIZES:
         print("   STDERR (Ошибки):", result.stderr.strip())
         times.append(0)
 
-# --- Построение графика ---
 plt.figure(figsize=(10, 6))
 plt.plot(SIZES, times, marker='o', linestyle='-', color='b', linewidth=2, markersize=8)
 plt.title('Зависимость времени выполнения от размера матрицы', fontsize=14)
@@ -58,13 +54,3 @@ plt.ylabel('Время выполнения (мс)', fontsize=12)
 plt.grid(True, linestyle='--', alpha=0.7)
 plt.savefig('benchmark_plot.png', dpi=300, bbox_inches='tight')
 print("\n📈 График сохранен как 'benchmark_plot.png'")
-
-# --- Генерация Markdown для README ---
-print("\n📝 === СКОПИРУЙТЕ ЭТО В ВАШ README.md ===\n")
-
-print("| Размер матрицы (N x N) | Объем задачи (элементов) | Время выполнения (мс) |")
-print("| :--- | :--- | :--- |")
-for n, t in zip(SIZES, times):
-    print(f"| {n} x {n} | {n**2} | {t:.2f} |")
-
-print("\n![График времени выполнения](benchmark_plot.png)")
