@@ -1,7 +1,9 @@
+#include <mpi.h>
 #include <iostream>
 #include <vector>
 #include <fstream>
-#include <mpi.h>
+#include <stdexcept>  
+#include <algorithm>
 
 struct Matrix {
     int rows, cols;
